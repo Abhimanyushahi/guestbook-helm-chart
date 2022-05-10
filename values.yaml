@@ -1,5 +1,5 @@
 frontend:
-  replicaCount: 2
+  replicaCount: 3
 
   image:
     name: gcr.io/google-samples/gb-frontend
@@ -29,7 +29,7 @@ frontend:
 
     resources:
       requests:
-        cpu: 100m
+        cpu: 50m
         memory: 100Mi
 
   nodeSelector: {}
@@ -64,7 +64,7 @@ redisMaster:
 
   resources:
     requests:
-      cpu: 100m
+      cpu: 50m
       memory: 100Mi
 
   nodeSelector: {}
@@ -99,7 +99,7 @@ redisSlave:
 
     resources:
       requests:
-        cpu: 100m
+        cpu: 50m
         memory: 100Mi
 
   nodeSelector: {}
