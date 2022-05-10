@@ -1,5 +1,5 @@
 frontend:
-  replicaCount: 3
+  replicaCount: 1
 
   image:
     name: gcr.io/google-samples/gb-frontend
@@ -74,7 +74,7 @@ redisMaster:
   affinity: {}
 
 redisSlave:
-  replicaCount: 2
+  replicaCount: 1
 
   image:
     name: gcr.io/google_samples/gb-redis-follower
