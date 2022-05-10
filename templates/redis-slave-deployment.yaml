@@ -21,11 +21,22 @@ spec:
       containers:
       - name: follower
         image: "{{ .Values.redisSlave.image.name }}:{{ .Values.redisSlave.image.tag }}"
-        resources:
-          requests:
-            cpu: 100m
-            memory: 100Mi
         ports:
         - containerPort: 6379
+        resources:
+{{ toYaml .Values.redisMaster.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.redisMaster.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.redisMaster.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+
         
         
