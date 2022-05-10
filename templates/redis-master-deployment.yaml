@@ -1,23 +1,25 @@
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: redis-master
+  name: redis-leader
+  labels:
+    app: redis
+    role: leader
+    tier: backend
 spec:
+  replicas: {{ .Values.redisMaster.replicaCount }}
   selector:
     matchLabels:
       app: redis
-      role: master
-      tier: backend
-  replicas: {{ .Values.redisMaster.replicaCount }}
   template:
     metadata:
       labels:
         app: redis
-        role: master
+        role: leader
         tier: backend
     spec:
       containers:
-      - name: master
+      - name: leader
         image: "{{ .Values.redisMaster.image.name }}:{{ .Values.redisMaster.image.tag }}"
         ports:
         - containerPort: 6379
@@ -35,3 +37,6 @@ spec:
       tolerations:
 {{ toYaml . | indent 8 }}
     {{- end }}
+
+        
+        
