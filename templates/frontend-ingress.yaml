@@ -9,5 +9,5 @@ metadata:
     tier: frontend
 spec:
   backend:
-    serviceName: frontend-backend
+    serviceName: frontend
     servicePort: {{ .Values.frontend.service.port }}
