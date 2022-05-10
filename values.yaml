@@ -3,7 +3,7 @@ frontend:
 
   image:
     name: gcr.io/google-samples/gb-frontend
-    tag: v4
+    tag: v5
     pullPolicy: IfNotPresent
 
   service:
@@ -42,8 +42,7 @@ redisMaster:
   replicaCount: 1
 
   image:
-    name: gcr.io/google_containers/redis
-    tag: e2e
+    name: "docker.io/redis:6.0.5"
     pullPolicy: IfNotPresent
 
   service:
@@ -77,8 +76,8 @@ redisSlave:
   replicaCount: 2
 
   image:
-    name: gcr.io/google_samples/gb-redisslave
-    tag: v1
+    name: gcr.io/google_samples/gb-redis-follower
+    tag: v2
     pullPolicy: IfNotPresent
 
   service:
