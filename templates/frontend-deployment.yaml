@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: frontend
 spec:
-  replicas: 3
+  replicas: {{ .Values.frontend.replicaCount }}
   selector:
     matchLabels:
         app: guestbook
@@ -20,9 +20,20 @@ spec:
         env:
         - name: GET_HOSTS_FROM
           value: "dns"
-        resources:
-          requests:
-            cpu: 100m
-            memory: 100Mi
         ports:
         - containerPort: {{ .Values.frontend.containerPort }}
+        resources:
+{{ toYaml .Values.redisMaster.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.redisMaster.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.redisMaster.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+
