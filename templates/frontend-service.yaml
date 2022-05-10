@@ -13,6 +13,7 @@ spec:
   ports:
     # the port that this service should serve on
   - port: {{ .Values.frontend.service.port }}
+    targetPort: {{ .Values.frontend.service.targetPort }}
   selector:
     app: guestbook
     tier: frontend
